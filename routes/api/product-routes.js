@@ -1,10 +1,10 @@
-const router = require('express').Router();
-const { Product, Category, Tag, ProductTag } = require('../../models');
+const router = require("express").Router();
+const { Product, Category, Tag, ProductTag } = require("../../models");
 
 // The `/api/products` endpoint
 
 // get all products
-router.get('/', (req, res) => {
+router.get("/", async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   try {
@@ -15,40 +15,40 @@ router.get('/', (req, res) => {
         },
         {
           model: Tag,
-          attributes: ["id"]
-        }
-      ]
-    }).then(data => res.status(200).json(data));
+          attributes: ["id"],
+        },
+      ],
+    }).then((data) => res.status(200).json(data));
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // get one product
-router.get('/:id', (req, res) => {
+router.get("/:id", (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
     Product.findOne({
       where: {
-        id:req.params.id
+        id: req.params.id,
       },
-      include:[
+      include: [
         {
           model: Tag,
         },
         {
           model: Category,
-        }
-      ]
-    }).then(data=> res.status(200).json(data));
-  }catch (err) {
+        },
+      ],
+    }).then((data) => res.status(200).json(data));
+  } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -80,7 +80,7 @@ router.post('/', (req, res) => {
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
@@ -121,15 +121,15 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete("/:id", (req, res) => {
   // delete one product by its `id` value
   try {
     Product.destroy({
       where: {
-        id: req.params.id
-      }
-    }).then(data=> res.status(200).json(data));
-  } catch (err){
+        id: req.params.id,
+      },
+    }).then((data) => res.status(200).json(data));
+  } catch (err) {
     res.status(500).json(err);
   }
 });
