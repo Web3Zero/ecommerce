@@ -14,4 +14,8 @@ Install dependancies using npm install. Initialise database by running mysql -u 
 
 # License
 
-License for this project is MIT.
+This project is licensed under the MIT License. For more information on license types, please reference this website for additional licensing information - https: //choosealicense.com/.
+
+# Tests
+
+This app does not have any tests.
